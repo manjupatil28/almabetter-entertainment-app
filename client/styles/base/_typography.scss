@@ -1,0 +1,129 @@
+// font sizes
+$font-body-small: 1.3rem;
+$font-body-medium: 1.5rem;
+$font-heading-small: 1.8rem;
+$font-heading-medium: 2.4rem;
+$font-heading-large: 3.2rem;
+
+@font-face {
+  font-family: 'Outfit';
+  src: url('../fonts/Outfit-Medium.eot');
+  src: url('../fonts/Outfit-Medium.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Outfit-Medium.woff2') format('woff2'),
+    url('../fonts/Outfit-Medium.woff') format('woff'),
+    url('../fonts/Outfit-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Outfit';
+  src: url('../fonts/Outfit-Light.eot');
+  src: url('../fonts/Outfit-Light.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Outfit-Light.woff2') format('woff2'),
+    url('../fonts/Outfit-Light.woff') format('woff'),
+    url('../fonts/Outfit-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+// font settings
+
+body {
+  color: $pure-white;
+  font-family: 'Outfit', sans-serif;
+  font-size: $font-body-medium;
+  font-weight: 300;
+}
+
+h1 {
+  font-size: $font-heading-large;
+  font-weight: 300;
+}
+
+h2 {
+  font-size: $font-heading-medium;
+}
+
+.heading-medium {
+  font-size: $font-heading-medium;
+}
+
+h3 {
+  font-size: $font-heading-medium;
+  font-weight: 500;
+}
+
+h4 {
+  font-size: $font-heading-small;
+  font-weight: 500;
+}
+
+.font-small {
+  font-size: $font-body-small;
+}
+
+.search {
+  & input {
+    font-size: $font-heading-medium;
+  }
+}
+
+.account {
+  &__error-label {
+    color: $red;
+  }
+}
+
+.input {
+  color: $pure-white;
+
+  &__account__error-label {
+    color: $red;
+  }
+}
+
+.btn {
+  & p {
+    color: rgba($pure-white, 0.75);
+  }
+
+  & h3 {
+    color: $pure-white;
+    text-align: left;
+  }
+
+  & h4 {
+    color: $pure-white;
+  }
+
+  &__account {
+    color: $pure-white;
+  }
+}
+
+@media (max-width: $mobile-break) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: $font-body-medium;
+  }
+
+  h4 {
+    font-size: 1.4rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+  }
+
+  .search {
+    & input {
+      font-size: 1.6rem;
+    }
+  }
+}

@@ -1,0 +1,37 @@
+.trending {
+  display: grid;
+  grid-template-rows: 6.4rem 23rem 1fr;
+
+  &__shows {
+    display: grid;
+    grid-auto-flow: column;
+    grid-column-gap: 4rem;
+    grid-template-columns: repeat(auto-fit, 47rem);
+    overflow-x: auto;
+    overflow-y: hidden;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    white-space: nowrap;
+
+    &::-webkit-scrollbar {
+      display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+    }
+  }
+}
+
+@media (max-width: $tablet-break) {
+  .trending {
+    margin: 0;
+  }
+}
+
+@media (max-width: $mobile-break) {
+  .trending {
+    grid-template-rows: 4.1rem 14rem 1fr;
+
+    &__shows {
+      grid-column-gap: $space-xsmall;
+      grid-template-columns: repeat(auto-fit, 24rem);
+    }
+  }
+}

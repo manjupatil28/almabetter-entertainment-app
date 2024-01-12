@@ -1,0 +1,121 @@
+.btn {
+  background-color: rgba($pure-white, 0);
+  border: none;
+  cursor: pointer;
+
+  &__search {
+    background-color: $dark-blue;
+    border: none;
+    cursor: pointer;
+    height: 3.2rem;
+    width: 3.2rem;
+  }
+
+  &--play {
+    background-color: rgba($pure-white, 0);
+    &:hover > .btn--play__icon {
+      opacity: 1;
+    }
+
+    &__icon {
+      align-items: center;
+      background-color: rgba($pure-white, 0.25);
+      border: none;
+      border-radius: 2.85rem;
+      display: flex;
+      height: 4.8rem;
+      justify-content: center;
+      opacity: 0;
+      position: absolute;
+      transition: opacity $fade ease-in-out;
+      width: 11.7rem;
+
+      &--trending {
+        left: 17.65rem;
+        top: 9.1rem;
+      }
+
+      &--show {
+        left: 8.15rem;
+        top: 6.5rem;
+      }
+
+      & h4 {
+        margin-left: $space-medium;
+      }
+    }
+  }
+
+  &__bookmark {
+    align-items: center;
+    background-color: rgba($dark-blue, 0.5);
+    border: none;
+    border-radius: 20rem;
+    cursor: pointer;
+    display: flex;
+    height: 3.2rem;
+    justify-content: center;
+    position: absolute;
+    transition: all $fade ease-in-out;
+    width: 3.2rem;
+
+    &--trending {
+      right: $space-medium;
+      top: $space-xsmall;
+    }
+
+    &--show {
+      right: $space-xsmall;
+      top: $space-xsmall;
+    }
+
+    & svg > path {
+      transition: all $fade ease-in-out;
+    }
+
+    &:hover > * > path {
+      stroke: $dark-blue;
+    }
+
+    &:hover {
+      background-color: $pure-white;
+    }
+  }
+
+  &__account {
+    background-color: $red;
+    height: 4.8rem;
+    transition: all $fade ease-in-out;
+
+    &:hover {
+      background-color: $pure-white;
+      color: $dark-blue;
+    }
+  }
+}
+
+@media (max-width: $tablet-break) {
+  .btn {
+    &--play {
+      &__icon {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: $mobile-break) {
+  .btn {
+    &__bookmark {
+      &--trending {
+        right: $space-xxsmall;
+        top: $space-xxsmall;
+      }
+
+      &--show {
+        right: $space-xxsmall;
+        top: $space-xxsmall;
+      }
+    }
+  }
+}

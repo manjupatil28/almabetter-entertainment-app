@@ -1,0 +1,40 @@
+.search {
+  display: grid;
+  grid-template-columns: 3.2rem 1fr;
+  height: 3.2rem;
+  margin: $space-large 0 $space-large 0;
+  position: relative;
+  width: 100%;
+}
+
+@media (max-width: $tablet-break) {
+  .search {
+    margin: 0;
+
+    & input {
+      border-bottom: none;
+      margin-left: $space-medium;
+
+      &:focus {
+        border-bottom: none;
+      }
+    }
+  }
+}
+
+@media (max-width: $mobile-break) {
+  .search {
+    & button {
+      height: 2.4rem;
+      width: 2.4rem;
+
+      & svg {
+        transform: scale(0.76);
+      }
+    }
+
+    & input {
+      padding: 0;
+    }
+  }
+}
