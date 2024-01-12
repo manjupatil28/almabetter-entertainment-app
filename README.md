@@ -2,7 +2,7 @@
 
 This project is created in response to the capstone project for module 5 of Full stack web development course for Almabetter.
 
-## Deployment Link [https://entertainment-app-y6rc.onrender.com/] 
+### Deployment Link [https://entertainment-app-y6rc.onrender.com/] 
 
 ## Authors
 
