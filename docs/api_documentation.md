@@ -51,6 +51,26 @@ Ensure that you keep your .env file secure and do not commit it to a public repo
 - **Status:** 200 OK  
 - **Body:** User data  
 
+#### Example
+```
+ POST /user/
+{
+  "username": "john_doe",
+  "email": "john@example.com",
+  "password": "securepassword"
+}
+```
+```
+200 OK
+{
+  "user_id": 123,
+  "username": "john_doe",
+  "email": "john@example.com",
+  "created_at": "2024-01-12T12:30:45Z",
+  "updated_at": "2024-01-12T12:30:45Z"
+}
+
+```
 ### Login User
 
 **Endpoint:** `POST /user/login`  
@@ -60,6 +80,24 @@ Ensure that you keep your .env file secure and do not commit it to a public repo
 **Response:**  
 - **Status:** 200 OK  
 - **Body:** User data  
+
+#### Example
+```
+POST /user/login
+{
+  "email": "john@example.com",
+  "password": "securepassword"
+}
+```
+```
+200 OK
+{
+  "user_id": 123,
+  "username": "john_doe",
+  "email": "john@example.com"
+}
+
+```
 
 ### Validate User
 
@@ -72,6 +110,22 @@ Ensure that you keep your .env file secure and do not commit it to a public repo
 - **Status:** 200 OK  
 - **Body:** User data  
 
+#### Example
+```
+GET /user/
+Headers:
+  Authorization: Bearer <token>
+```
+```
+200 OK
+{
+  "user_id": 123,
+  "username": "john_doe",
+  "email": "john@example.com"
+}
+
+
+```
 ## Bookmark Endpoints
 
 ### Get Bookmarks
@@ -85,6 +139,19 @@ Ensure that you keep your .env file secure and do not commit it to a public repo
 - **Status:** 200 OK  
 - **Body:** List of bookmarks  
 
+#### Example
+
+```
+GET /bookmarks/
+Headers:
+  Authorization: Bearer <token>
+
+```
+```
+200 OK
+[  {    "bookmark_id": 1,    "title": "Interstellar",    "type": "movie",    "user_id": 123  },  {    "bookmark_id": 2,    "title": "Stranger Things",    "type": "tvshow",    "user_id": 123  }]
+
+```
 ### Set Bookmark
 
 **Endpoint:** `POST /bookmarks/`  
@@ -97,6 +164,29 @@ Ensure that you keep your .env file secure and do not commit it to a public repo
 - **Status:** 200 OK  
 - **Body:** New bookmark data  
 
+#### Example
+
+```
+POST /bookmarks/
+Headers:
+  Authorization: Bearer <token>
+Body:
+{
+  "title": "Inception",
+  "type": "movie"
+}
+
+```
+```
+200 OK
+{
+  "bookmark_id": 3,
+  "title": "Inception",
+  "type": "movie",
+  "user_id": 123
+}
+
+```
 ### Delete Bookmark
 
 **Endpoint:** `DELETE /bookmarks/:id`  
@@ -110,8 +200,18 @@ Ensure that you keep your .env file secure and do not commit it to a public repo
 - **Status:** 200 OK  
 - **Body:** Message indicating successful deletion
 
-
-
+#### Example
+```
+DELETE /bookmarks/3
+Headers:
+  Authorization: Bearer <token>
+```
+```
+200 OK
+{
+  "message": "Bookmark deleted successfully"
+}
+```
 ## Movies Endpoints:
 
 ### Search Movies
@@ -125,6 +225,16 @@ Ensure that you keep your .env file secure and do not commit it to a public repo
   - **Status:** 200 OK
   - **Body:** List of movies matching the search query.
 
+#### Example
+
+```
+GET /movies/search?query=Inception
+```
+```
+200 OK
+[  {    "movie_id": 456,    "title": "Inception",    "poster": "https://example.com/posters/inception.jpg",    "synopsis": "A mind-bending movie...",    "release_date": "2010-07-16",    "genre": "Sci-Fi",    "rating": "9.2"  }]
+```
+
 ### Popular Movies
 
 - **Endpoint:** `GET /movies/popular`
@@ -134,6 +244,38 @@ Ensure that you keep your .env file secure and do not commit it to a public repo
 - **Response:**
   - **Status:** 200 OK
   - **Body:** List of popular movies.
+
+#### Example
+
+```
+GET /movies/popular
+
+```
+```
+200 OK
+[
+  {
+    "movie_id": 1,
+    "title": "Inception",
+    "poster": "https://example.com/inception.jpg",
+    "synopsis": "A mind-bending movie...",
+    "release_date": "2010-07-16",
+    "genre": "Sci-Fi",
+    "rating": "9.2"
+  },
+  {
+    "movie_id": 2,
+    "title": "The Dark Knight",
+    "poster": "https://example.com/dark_knight.jpg",
+    "synopsis": "Gotham's protector...",
+    "release_date": "2008-07-18",
+    "genre": "Action",
+    "rating": "9.0"
+  },
+  // ... additional movies
+]
+
+```
 
 ### Movie Details
 
@@ -145,6 +287,26 @@ Ensure that you keep your .env file secure and do not commit it to a public repo
 - **Response:**
   - **Status:** 200 OK
   - **Body:** Details of the requested movie.
+
+#### Example
+
+```
+GET /movies/1
+
+```
+```
+200 OK
+{
+  "movie_id": 1,
+  "title": "Inception",
+  "poster": "https://example.com/inception.jpg",
+  "synopsis": "A mind-bending movie...",
+  "release_date": "2010-07-16",
+  "genre": "Sci-Fi",
+  "rating": "9.2"
+}
+
+```
 
 ## TV Shows Endpoints:
 
