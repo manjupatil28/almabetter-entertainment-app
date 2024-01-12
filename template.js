@@ -11,7 +11,7 @@ export default () => {
 
         <link rel="shortcut icon" type="image/png" sizes="32x32" href=${favicon}>
 
-        <title>Frontend Mentor | Entertainment web app</title>
+        <title>Entertainment Web App</title>
     </head>
     <body>
         <div id="root"></div>
