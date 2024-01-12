@@ -88,4 +88,4 @@
 
 ### ER Diagram
 
-![Local Image](images/my_image.png)
+![Local Image](../images/ERD.png)
