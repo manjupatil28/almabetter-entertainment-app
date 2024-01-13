@@ -3,7 +3,7 @@ import React from 'react'
 import TrendingCards from './TrendingCards'
 
 import { useHorizontalScroll } from '../hooks/useHorizontalScroll'
-
+//Trending Component
 function Trending() {
   const scrollRef = useHorizontalScroll()
 

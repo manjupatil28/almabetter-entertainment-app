@@ -1,32 +1,45 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-import { setTerm, searchShows } from '../features/data/dataSlice'
+import { setTerm, searchShows } from '../features/data/dataSlice';
 
-import SearchButton from '../assets/icon-search.svg'
+import SearchButton from '../assets/icon-search.svg';
 
+// Search Component
 function Search() {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const { searchTerm } = useSelector((state) => state.data)
+  // Redux hooks for dispatching actions and accessing state
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { searchTerm } = useSelector((state) => state.data);
 
+  // Function to handle input changes
   const onChange = (e) => {
-    dispatch(setTerm(e.target.value))
+    // Dispatch action to set the search term
+    dispatch(setTerm(e.target.value));
   }
 
+  // Function to handle form submission
   const onSubmit = (e) => {
-    e.preventDefault()
+    // Prevent default form submission behavior
+    e.preventDefault();
 
-    dispatch(searchShows(searchTerm))
-    navigate('/search')
+    // Dispatch action to search shows with the current search term
+    dispatch(searchShows(searchTerm));
+
+    // Navigate to the search results page
+    navigate('/search');
   }
 
+  // JSX structure for rendering Search component
   return (
     <form className='search' onSubmit={onSubmit}>
+      {/* Search button */}
       <button className='btn__search' title='Search'>
         <SearchButton />
       </button>
+
+      {/* Input field for entering search term */}
       <input
         className='input input__search heading-medium'
         type='text'
@@ -35,7 +48,8 @@ function Search() {
         onChange={onChange}
       ></input>
     </form>
-  )
+  );
 }
 
-export default Search
+// Export the Search component
+export default Search;

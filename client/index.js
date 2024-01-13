@@ -5,7 +5,7 @@ import store from './store'
 
 import App from './App'
 import './styles/main.scss'
-
+//Make the store available to the app
 render(
   <Provider store={store}>
     <App />

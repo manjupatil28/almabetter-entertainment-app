@@ -5,7 +5,7 @@ const User = require('../models/userModel')
 
 // Generate JWT
 const generateToken = (id) => {
-  const jwtSecret = 'yourHardcodedSecretKey';
+  const jwtSecret = 'HardcodedSecretKey';
   return jwt.sign({ id }, jwtSecret, {
     expiresIn: '30d',
   })

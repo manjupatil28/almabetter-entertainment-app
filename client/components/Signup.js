@@ -1,72 +1,87 @@
-import React, { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
-import { authReset, signUp } from '../features/auth/authSlice'
-import { getBookmarks } from '../features/bookmark/bookmarkSlice'
+import { authReset, signUp } from '../features/auth/authSlice';
+import { getBookmarks } from '../features/bookmark/bookmarkSlice';
 
-import Logo from '../assets/logo.svg'
+import Logo from '../assets/logo.svg';
 
+// Signup Component
 function Signup() {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  // React hooks for navigation, dispatching actions, and managing form state
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm()
+  } = useForm();
 
+  // Redux state for authentication information
   const { user, isError, isSuccess, message } = useSelector(
     (state) => state.auth
-  )
+  );
 
+  // Local state for form data
   const [formData, setFormData] = useState({
     email: '',
     password: '',
     password2: '',
-  })
+  });
 
-  const { email, password, password2 } = formData
+  const { email, password, password2 } = formData;
 
+  // useEffect to handle side effects based on authentication state changes
   useEffect(() => {
+    // If signup is successful, retrieve bookmarks and navigate to the home page
     if (isSuccess && user) {
-      dispatch(getBookmarks())
-      navigate('/')
+      dispatch(getBookmarks());
+      navigate('/');
     }
 
+    // Cleanup function to reset authentication state on component unmount
     return () => {
-      dispatch(authReset())
+      dispatch(authReset());
     }
-  }, [user, isSuccess, isError, message, navigate, dispatch])
+  }, [user, isSuccess, isError, message, navigate, dispatch]);
 
+  // Function to handle input changes
   const onChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-    })
+    });
   }
 
+  // Function to handle form submission
   const onSubmit = () => {
+    // Check if the passwords match before dispatching the signup action
     if (password !== password2) {
-      console.log('Passwords do not match!')
+      console.log('Passwords do not match!');
     } else {
       const userData = {
         email,
         password,
-      }
+      };
 
-      dispatch(signUp(userData))
+      dispatch(signUp(userData));
     }
   }
 
+  // JSX structure for rendering Signup component
   return (
     <div className='account__wrapper'>
       <div className='account'>
+        {/* Application logo */}
         <Logo />
+
+        {/* Signup form */}
         <div className='account__form'>
           <h1>Sign Up</h1>
           <form autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
+            {/* Email input field */}
             <div>
               <input
                 className='input input__account'
@@ -80,10 +95,13 @@ function Signup() {
                 value={email}
                 onChange={onChange}
               />
+              {/* Error message for email validation */}
               <label className='input__account__error-label'>
                 {errors.email && <p>Please enter a valid email</p>}
               </label>
             </div>
+
+            {/* Password input field */}
             <div>
               <input
                 className='input input__account'
@@ -93,10 +111,13 @@ function Signup() {
                 value={password}
                 onChange={onChange}
               />
+              {/* Error message for password validation */}
               <label className='input__account__error-label'>
                 {errors.password && <p>Can't be empty</p>}
               </label>
             </div>
+
+            {/* Repeat Password input field */}
             <div>
               <input
                 className='input input__account'
@@ -106,15 +127,19 @@ function Signup() {
                 value={password2}
                 onChange={onChange}
               />
+              {/* Error message for password confirmation */}
               <label className='input__account__error-label'>
                 {errors.password2 && <p>Can't be empty</p>}
               </label>
             </div>
 
+            {/* Submit button */}
             <button className='btn btn__account' type='submit'>
               Create an account
             </button>
           </form>
+
+          {/* Footer section with a link to login */}
           <div className='account__footer'>
             <p>
               Already have an account? <a href='/login'>Login</a>
@@ -123,7 +148,8 @@ function Signup() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Signup
+// Export the Signup component
+export default Signup;

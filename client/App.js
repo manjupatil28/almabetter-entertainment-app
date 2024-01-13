@@ -1,33 +1,38 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { hot } from 'react-hot-loader/root'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { hot } from 'react-hot-loader/root';
 
-import { validate } from './features/auth/authSlice'
-import { getBookmarks, bookmarkReset } from './features/bookmark/bookmarkSlice'
+import { validate } from './features/auth/authSlice';
+import { getBookmarks, bookmarkReset } from './features/bookmark/bookmarkSlice';
 
-import Layout from './components/Layout'
-import Home from './components/Home'
-import SearchResults from './components/SearchResults'
-import FilterdShows from './components/FilteredShows'
-import BookmarkedShows from './components/BookmarkedShows'
-import Login from './components/Login'
-import Signup from './components/Signup'
-import PageNotFound from './components/PageNotFound'
+import Layout from './components/Layout';
+import Home from './components/Home';
+import SearchResults from './components/SearchResults';
+import FilteredShows from './components/FilteredShows'; 
+import BookmarkedShows from './components/BookmarkedShows';
+import Login from './components/Login';
+import Signup from './components/Signup';
+import PageNotFound from './components/PageNotFound';
 
 const App = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const { user, isAuthenticated } = useSelector((state) => state.auth)
+  // Select relevant data from the Redux store
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    dispatch(validate(user))
+    // Validate user on component mount
+    dispatch(validate(user));
+
     if (isAuthenticated) {
-      dispatch(getBookmarks())
+      // Fetch bookmarks if the user is authenticated
+      dispatch(getBookmarks());
     } else {
-      dispatch(bookmarkReset())
+      // Reset bookmarks if the user is not authenticated
+      dispatch(bookmarkReset());
     }
-  }, [user, isAuthenticated])
+  }, [user, isAuthenticated]);
 
   return (
     <>
@@ -36,27 +41,32 @@ const App = () => {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/search' element={<SearchResults />} />
+            {/* Route for Movies */}
             <Route
               path='/movies'
               element={
-                <FilterdShows filterType={'Movie'} pageTitle={'Movies'} />
+                <FilteredShows filterType={'Movie'} pageTitle={'Movies'} />
               }
             />
+            {/* Route for TV Series */}
             <Route
               path='/tv'
               element={
-                <FilterdShows filterType={'TV Series'} pageTitle={'Tv'} />
+                <FilteredShows filterType={'TV Series'} pageTitle={'Tv'} />
               }
             />
+            {/* Route for Bookmarked Shows */}
             <Route path='/bookmarks' element={<BookmarkedShows />} />
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<Signup />} />
+            {/* Route for Page Not Found */}
             <Route path='*' element={<PageNotFound />} />
           </Routes>
         </Layout>
       </BrowserRouter>
     </>
-  )
-}
+  );
+};
 
-export default hot(App)
+// Enable Hot Module Replacement (HMR) for faster development feedback
+export default hot(App);
