@@ -27,7 +27,7 @@ export const validate = createAsyncThunk(
           error.response.data &&
           error.response.data.message) ||
         error.message ||
-        error.toString();
+        error.toString()
       return thunkAPI.rejectWithValue(message);
     }
   }
@@ -45,7 +45,7 @@ export const signUp = createAsyncThunk(
           error.response.data &&
           error.response.data.message) ||
         error.message ||
-        error.toString();
+        error.toString()
       return thunkAPI.rejectWithValue(message);
     }
   }
@@ -59,7 +59,7 @@ export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
     const message =
       (error.response && error.response.data && error.response.data.message) ||
       error.message ||
-      error.toString();
+      error.toString()
     return thunkAPI.rejectWithValue(message);
   }
 });
@@ -104,7 +104,39 @@ export const authSlice = createSlice({
       .addCase(login.pending, (state) => {
         state.isLoading = true;
       })
-      // ... (handling other cases)
+    // ... (handling other cases)
+    .addCase(login.fulfilled, (state, action) => {
+      state.isLoading = false
+      state.isSuccess = true
+      state.message = ''
+      state.user = action.payload
+      state.isAuthenticated = true
+    })
+    .addCase(login.rejected, (state, action) => {
+      state.isLoading = false
+      state.isError = true
+      state.message = action.payload
+      state.user = null
+      state.isAuthenticated = false
+    })
+    .addCase(logout.fulfilled, (state) => {
+      state.user = null
+      state.isAuthenticated = false
+    })
+    .addCase(validate.pending, (state) => {
+      state.isLoading = true
+    })
+    .addCase(validate.fulfilled, (state) => {
+      state.isLoading = false
+      state.isSuccess = true
+      state.isAuthenticated = true
+      state.message = ''
+    })
+    .addCase(validate.rejected, (state) => {
+      state.isLoading = false
+      state.user = null
+      state.isAuthenticated = false
+    })
   },
 });
 
