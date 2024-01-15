@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "routes": [
+    {
+      "src": "/server-generated.js",
+      "dest": "public/server-generated.js"
+    }
+  ]
+}
